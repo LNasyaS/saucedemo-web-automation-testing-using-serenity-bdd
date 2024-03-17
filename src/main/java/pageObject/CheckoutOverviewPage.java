@@ -1,20 +1,21 @@
 package pageObject;
 
+import BasePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import BasePage.BasePage;
 
 
 public class CheckoutOverviewPage {
 
     public WebDriver driver;
-
+    public static BasePage basePage;
 
     public CheckoutOverviewPage(WebDriver driver){
         PageFactory.initElements(driver,this);
         this.driver = driver;
+        this.basePage = new BasePage(driver);
     }
 
 //  locator
@@ -32,10 +33,7 @@ public class CheckoutOverviewPage {
 
 //  function
     public boolean verifyCheckoutOverviewPage() {
-
-        BasePage.scrollToElement(labelCheckout);
-        BasePage.scrollToElement(checkoutItem);
-        BasePage.scrollToElement(totalPrice);
+        basePage.scrollIntoView(totalPrice);
 
         labelCheckout.isDisplayed();
         checkoutItem.isDisplayed();
@@ -43,7 +41,10 @@ public class CheckoutOverviewPage {
         return true;
     }
 
+
     public static void clickFinishButton() {
+        basePage.scrollIntoView(finishButton);
+
         finishButton.click();
     }
 

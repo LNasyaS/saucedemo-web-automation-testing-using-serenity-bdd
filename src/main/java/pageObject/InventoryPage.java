@@ -1,21 +1,23 @@
 package pageObject;
 
+import BasePage.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import BasePage.BasePage;
 
 public class InventoryPage {
 
-    public WebDriver driver;
+    public static WebDriver driver;
+    public static BasePage basePage;
 
 
     public InventoryPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
+        this.basePage = new BasePage(driver);
     }
 
 //  locator
@@ -44,14 +46,19 @@ public class InventoryPage {
         select.selectByVisibleText(text);
     }
 
+
     public void clickButtonAddToCart(String item) {
         String buttonXpath = "//div[text()='"+ item +"']/ancestor::div[@class='inventory_item_description']//button[text()='Add to cart']";
         WebElement button = driver.findElement(By.xpath(buttonXpath));
-        BasePage.scrollToElement(button);
+
+        basePage.scrollIntoView(button);
+
         button.click();
     }
 
     public void clickShoppingCart() {
+        basePage.scrollIntoView(shoppingCart);
+
         shoppingCart.click();
     }
 

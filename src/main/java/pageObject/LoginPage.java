@@ -1,16 +1,21 @@
 package pageObject;
 
+import BasePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 public class LoginPage {
     public static WebDriver webDriver;
+
+    public static BasePage basePage;
 
     public LoginPage(WebDriver driver){
         PageFactory.initElements(driver, this);
         webDriver = driver;
+        this.basePage = new BasePage(driver);
     }
 
 
@@ -45,9 +50,6 @@ public class LoginPage {
         return errorMessage.getText();
     }
 
-    public void clickLogin(){
-        loginButton.click();
-    }
 
     public boolean verifyLoginPage(){
         boolean a = loginLogo.isDisplayed();
@@ -57,4 +59,11 @@ public class LoginPage {
         return a && b && c && d;
     }
 
+    public void clickLogin(){
+//        basePage.scrollIntoView(loginButton);
+//        basePage.waitForElementClickable(loginButton);
+//        basePage.moveToElement(loginButton);
+
+        loginButton.click();
+    }
 }

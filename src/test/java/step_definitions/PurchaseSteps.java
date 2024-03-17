@@ -31,7 +31,7 @@ public class PurchaseSteps {
 
     @Then("User should see the shopping cart icon show the number of {string} items")
     public void userShouldSeeTheShoppingCartIconShowTheNumberOfItems(String expectedItemCount) {
-        VerifyFunctions.verifyShoppingCartItemCount(expectedItemCount);
+        verifyFunctions.verifyShoppingCartItemCount(expectedItemCount);
     }
 
     @When("User click shopping cart")

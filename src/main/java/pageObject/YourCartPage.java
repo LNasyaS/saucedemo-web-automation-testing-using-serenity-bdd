@@ -11,11 +11,13 @@ import org.openqa.selenium.support.PageFactory;
 public class YourCartPage {
 
     public static WebDriver driver;
+    public static BasePage basePage;
 
 
     public YourCartPage(WebDriver driver){
         PageFactory.initElements(driver,this);
         this.driver = driver;
+        this.basePage = new BasePage(driver);
 
     }
 
@@ -32,7 +34,6 @@ public class YourCartPage {
 
 //  function
     public static boolean verifyLabelYourCart() {
-        BasePage.scrollToElement(labelYourCart);
         labelYourCart.isDisplayed();
         cartList.isDisplayed();
         return true;
@@ -44,6 +45,8 @@ public class YourCartPage {
     }
 
     public static void clickCheckoutButton() {
+        basePage.scrollIntoView(checkoutButton);
+
         checkoutButton.click();
     }
 

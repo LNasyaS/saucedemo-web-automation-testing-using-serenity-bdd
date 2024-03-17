@@ -23,11 +23,6 @@ public class BasePage {
 
     public static final int WAIT = 120;
 
-//  method to scroll to an element
-    public static void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
 
     public void clickCenter(WebElement e) {
         Actions actions = new Actions(driver);
@@ -58,9 +53,9 @@ public class BasePage {
     }
     public void zoomInOut(String zoomLevel){
         JavascriptExecutor js = (JavascriptExecutor) driver;
-
         js.executeScript("document.body.style.zoom='" + zoomLevel + "'");
     }
+
     public void waitForElementVisible(WebElement e) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT));
             wait.until(ExpectedConditions.visibilityOf(e));
@@ -182,5 +177,12 @@ public class BasePage {
         actions.moveToElement(slider,x,y).perform();
         System.out.println("Element already slide to x : "+ x +" y : "+ y);
     }
+
+
+    public void moveToElement(WebElement e) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(e).click().perform();
+    }
+
 
 }

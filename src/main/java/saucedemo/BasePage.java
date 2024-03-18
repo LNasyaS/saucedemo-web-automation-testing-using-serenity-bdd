@@ -1,4 +1,4 @@
-package BasePage;
+package saucedemo;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -6,16 +6,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.JavascriptExecutor;
 
-
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BasePage {
 
-    public static WebDriver driver;
+    public WebDriver driver;
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -183,6 +183,24 @@ public class BasePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(e).click().perform();
     }
+
+    public double roundToTwoDecimal(double value) {
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    public double trim(String content) {
+        String[] split = content.split("\\$");
+
+        if(split.length > 1) {
+            String number = split[1].trim();
+            return Double.parseDouble(number);
+        } else {
+            return 0.0;
+        }
+    }
+
 
 
 }

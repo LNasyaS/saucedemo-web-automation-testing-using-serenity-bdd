@@ -1,18 +1,21 @@
-package pageObject;
+package saucedemo.pageObject;
 
+import saucedemo.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class YourInformationPage {
+public class YourInformationPage extends BasePage {
 
-    public static WebDriver driver;
+//    public WebDriver driver;
+//
+//    public YourInformationPage(WebDriver driver){
+//        this.driver = driver;
+//        PageFactory.initElements(driver,this);
+//    }
 
-
-    public YourInformationPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
+    public YourInformationPage(WebDriver driver) {
+        super(driver);
     }
 
 //  locator
@@ -20,19 +23,18 @@ public class YourInformationPage {
     private WebElement labelYourInformation;
 
     @FindBy(xpath = "//input[@id='first-name']")
-    private static WebElement fieldFirstName;
+    private WebElement fieldFirstName;
 
     @FindBy(xpath = "//input[@id='last-name']")
-    private static WebElement fieldLastName;
+    private WebElement fieldLastName;
 
     @FindBy(xpath = "//input[@id='postal-code']")
-    private static WebElement fieldZip;
+    private WebElement fieldZip;
 
     @FindBy(xpath = "//input[@id='continue']")
-    private static WebElement continueButton;
+    private WebElement continueButton;
 
-
-    //  function
+//  function
     public boolean verifyYourInformationPage() {
         labelYourInformation.isDisplayed();
         fieldFirstName.isDisplayed();
@@ -41,19 +43,19 @@ public class YourInformationPage {
         return true;
     }
 
-    public static void inputFirstName(String firstName){
+    public void inputFirstName(String firstName){
         fieldFirstName.sendKeys(firstName);
     }
 
-    public static void inputLastName(String lastName){
+    public void inputLastName(String lastName){
         fieldLastName.sendKeys(lastName);
     }
 
-    public static void inputZip(String zip){
+    public void inputZip(String zip){
         fieldZip.sendKeys(zip);
     }
 
-    public static void clickContinueButton() {
+    public void clickContinueButton() {
         continueButton.click();
     }
 

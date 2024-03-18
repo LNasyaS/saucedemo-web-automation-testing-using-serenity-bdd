@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import pageObject.*;
+import saucedemo.pageObject.*;
 
 public class PurchaseSteps {
 
@@ -16,7 +16,6 @@ public class PurchaseSteps {
     CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
     YourInformationPage yourInformationPage = new YourInformationPage(driver);
     CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
-    VerifyFunctions verifyFunctions = new VerifyFunctions(driver);
 
 
     @When("User sort product by {string}")
@@ -31,7 +30,7 @@ public class PurchaseSteps {
 
     @Then("User should see the shopping cart icon show the number of {string} items")
     public void userShouldSeeTheShoppingCartIconShowTheNumberOfItems(String expectedItemCount) {
-        verifyFunctions.verifyShoppingCartItemCount(expectedItemCount);
+        inventoryPage.verifyShoppingCartItemCount(expectedItemCount);
     }
 
     @When("User click shopping cart")
@@ -39,7 +38,7 @@ public class PurchaseSteps {
         inventoryPage.clickShoppingCart();
     }
 
-    @Then("User is already on Your Cart page")
+    @Then("User is already on your cart page")
     public void userIsAlreadyOnYourCartPage() {
         Assert.assertTrue(yourCartPage.verifyLabelYourCart());
     }
@@ -49,22 +48,18 @@ public class PurchaseSteps {
         yourCartPage.clickRemoveButton(item);
     }
 
-    @Then("User should see the shopping cart icon show the updated number of {string} items")
-    public void userShouldSeeTheShoppingCartIconShowTheUpdatedNumberOfItems(String expectedItemCount) {
-        verifyFunctions.verifyShoppingCartItemCount(expectedItemCount);
-    }
 
-    @When("User click Checkout button")
+    @When("User click checkout button")
     public void userClickCheckoutButton() {
         yourCartPage.clickCheckoutButton();
     }
 
-    @Then("User is already on Checkout: Your Information page")
+    @Then("User is already on checkout your information page")
     public void userIsAlreadyOnCheckoutYourInformationPage() {
         Assert.assertTrue(yourInformationPage.verifyYourInformationPage());
     }
 
-    @When("User input {string} as First Name and {string} as Last Name and {string} as Zip Code and click continue")
+    @When("User input {string} as firstName and {string} as lastName and {string} as zip and click continue")
     public void userInputAsFirstNameAndAsLastNameAndAsZipPostalCodeAndClickContinue(String firstName, String lastName, String zip) {
         yourInformationPage.inputFirstName(firstName);
         yourInformationPage.inputLastName(lastName);
@@ -72,27 +67,26 @@ public class PurchaseSteps {
         yourInformationPage.clickContinueButton();
     }
 
-    @Then("User is already on Checkout: Overview page")
+    @Then("User is already on checkout overview page")
     public void userIsAlreadyOnCheckoutOverviewPage() {
         Assert.assertTrue(checkoutOverviewPage.verifyCheckoutOverviewPage());
     }
 
 
-    @When("User can see the verified total price")
+    @And("User can see the verified total price")
     public void userCanSeeTheVerifiedTotalPrice() {
-        double extractItemTotal = VerifyFunctions.extractItemTotal();
-        double extractTax = VerifyFunctions.extractTax();
-        double extractTotalPrice = VerifyFunctions.extractTotalPrice();
-        verifyFunctions.verifyTotalPrice(extractItemTotal, extractTax, extractTotalPrice);
+        double extractItemTotal = checkoutOverviewPage.extractItemTotal();
+        double extractTax = checkoutOverviewPage.extractTax();
+        double extractTotalPrice = checkoutOverviewPage.extractTotalPrice();
+        checkoutOverviewPage.verifyTotalPrice(extractItemTotal, extractTax, extractTotalPrice);
     }
 
-    @And("User click Finish button")
+    @When("User click finish button")
     public void userClickFinishButton() {
         checkoutOverviewPage.clickFinishButton();
     }
 
-
-    @Then("User is already on Checkout:Complete! page")
+    @Then("User is already on checkout complete page")
     public void userIsAlreadyOnCheckoutCompletePage() {
         Assert.assertTrue(checkoutCompletePage.verifyCheckoutCompletePage());
     }

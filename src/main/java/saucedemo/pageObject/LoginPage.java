@@ -1,23 +1,23 @@
-package pageObject;
+package saucedemo.pageObject;
 
-import BasePage.BasePage;
+import saucedemo.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 
-public class LoginPage {
-    public static WebDriver webDriver;
+public class LoginPage extends BasePage {
 
-    public static BasePage basePage;
+//    public static WebDriver driver;
+//
+//    public LoginPage(WebDriver driver){
+//        PageFactory.initElements(driver, this);
+//        webDriver = driver;
+//    }
 
-    public LoginPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        webDriver = driver;
-        this.basePage = new BasePage(driver);
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
-
 
 //  locator
     @FindBy(xpath = "//input[@id='user-name']")
@@ -37,7 +37,7 @@ public class LoginPage {
 
 
 
-//  function
+    //  function
     public void inputFieldUserName(String userName){
         fieldUserName.sendKeys(userName);
     }
@@ -60,10 +60,8 @@ public class LoginPage {
     }
 
     public void clickLogin(){
-//        basePage.scrollIntoView(loginButton);
-//        basePage.waitForElementClickable(loginButton);
-//        basePage.moveToElement(loginButton);
-
+        scrollIntoView(loginButton);
+        waitForElementClickable(loginButton);
         loginButton.click();
     }
 }

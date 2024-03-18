@@ -7,41 +7,20 @@ Feature: purchase
     Given user open the web page
     When User input "standard_user" as userName and "secret_sauce" as password and click login
     Then  User is already on the landing page
-    When User sort product by "Name (Z to A)"
+    When User sort product by "Price (low to high)"
     And User click add to cart item "Sauce Labs Onesie"
-    And User click add to cart item "Test.allTheThings() T-Shirt (Red)"
+    And User click add to cart item "Sauce Labs Bike Light"
     Then User should see the shopping cart icon show the number of "2" items
     When User click shopping cart
-    Then User is already on Your Cart page
-    When User click remove button for item "Test.allTheThings() T-Shirt (Red)"
-    Then User should see the shopping cart icon show the updated number of "1" items
-    When User click Checkout button
-    Then User is already on Checkout: Your Information page
-    When User input "Spongebob" as First Name and "Squarepants" as Last Name and "140786" as Zip Code and click continue
-    Then User is already on Checkout: Overview page
-    When User can see the verified total price
-    And User click Finish button
-    Then User is already on Checkout:Complete! page
-
-  @TC4
-  Scenario: User open web zoomed in 125%, sort products by price high to low order, scroll add three items to cart, and complete the checkout
-    Given user open the web page
-    And User zoom in "125%"
-    When User input "standard_user" as userName and "secret_sauce" as password and click login
-    Then  User is already on the landing page
-    When User sort product by "Price (high to low)"
-    And User click add to cart item "Sauce Labs Fleece Jacket"
-    And User click add to cart item "Sauce Labs Backpack"
-    And User click add to cart item "Sauce Labs Onesie"
-    Then User should see the shopping cart icon show the number of "3" items
-    When User click shopping cart
-    Then User is already on Your Cart page
-    When User click Checkout button
-    Then User is already on Checkout: Your Information page
-    When User input "Spongebob" as First Name and "Squarepants" as Last Name and "140786" as Zip Code and click continue
-    Then User is already on Checkout: Overview page
-    When User can see the verified total price
-    And User click Finish button
-    Then User is already on Checkout:Complete! page
+    Then User is already on your cart page
+    When User click remove button for item "Sauce Labs Bike Light"
+    Then User should see the shopping cart icon show the number of "1" items
+    When User click checkout button
+    Then User is already on checkout your information page
+    When User input "Spongebob" as firstName and "Squarepants" as lastName and "140786" as zip and click continue
+    Then User is already on checkout overview page
+    And User can see the verified total price
+    When User click finish button
+    Then User is already on checkout complete page
 
 

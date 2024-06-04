@@ -35,12 +35,31 @@ jobs:
     - name: Generate Cucumber Report
       run: mvn net.masterthought:maven-cucumber-reporting:generate
 
+    - name: Copy Cucumber HTML Report
+      run: |
+        mkdir -p report
+        cp -r target/Report/cucumber-reports/* report/
+
+    - name: Commit Report Files
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git add report
+        git commit -m "Updating the repository report"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./target/Report/cucumber-reports
+        publish_dir: ./report
         publish_branch: gh-pages
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
+

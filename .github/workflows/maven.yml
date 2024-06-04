@@ -16,7 +16,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -30,5 +29,16 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: run test
+    - name: Run tests
       run: mvn clean test
+
+    - name: Generate Cucumber Report
+      run: mvn net.masterthought:maven-cucumber-reporting:generate
+
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./target/Report/cucumber-reports
+

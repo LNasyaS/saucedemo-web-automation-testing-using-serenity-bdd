@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -35,6 +35,21 @@ jobs:
     - name: Generate Cucumber Report
       run: mvn net.masterthought:maven-cucumber-reporting:generate
 
+    - name: Create index.html for GitHub Pages
+      run: |
+        echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Test Reports</title>
+        </head>
+        <body>
+            <h1>Test Reports</h1>
+            <p><a href="cucumber-html-report/feature-overview.html">Feature Overview Report</a></p>
+        </body>
+        </html>' > ./target/Report/cucumber-reports/index.html
+
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
@@ -44,6 +59,7 @@ jobs:
         publish_branch: gh-pages
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
+
 
 
 

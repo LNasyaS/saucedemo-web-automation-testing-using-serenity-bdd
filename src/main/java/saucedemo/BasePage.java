@@ -178,7 +178,6 @@ public class BasePage {
         System.out.println("Element already slide to x : "+ x +" y : "+ y);
     }
 
-
     public void moveToElement(WebElement e) {
         Actions actions = new Actions(driver);
         actions.moveToElement(e).click().perform();

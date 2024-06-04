@@ -27,7 +27,7 @@ public class CheckoutOverviewPage extends BasePage {
     @FindBy(xpath = "//div[@class='cart_list']")
     private  WebElement checkoutItem;
 
-    @FindBy(xpath = "//div[@class='summary_info_label summary_total_label']")
+    @FindBy(css = ".summary_total_label")
     private WebElement totalPrice;
 
     @FindBy(xpath = "//button[@id='finish']")

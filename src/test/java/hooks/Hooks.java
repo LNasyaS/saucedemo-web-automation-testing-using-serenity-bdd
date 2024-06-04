@@ -17,7 +17,7 @@ public class Hooks {
         //fungsi untuk setup chrome agar bisa terbuka
         WebDriverManager.chromedriver().setup();
         ChromeOptions co = new ChromeOptions();
-        co.addArguments("--remote-allow-origins=*");
+        co.addArguments("--remote-allow-origins=*", "--headless");
 
         //inisiasi library selenium
         driver = new ChromeDriver(co);
